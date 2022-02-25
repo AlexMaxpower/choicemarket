@@ -1,0 +1,11 @@
+# таблица соответствия товара в системе Сбермаркета и в магазине Утконос
+# ссылка на товар в Сбермаркете, ссылка на товар в Утконосе
+
+https://sbermarket.ru/metro/moloko-domik-v-dierievnie-stierilizovannoie-3-2-percent-1, https://www.utkonos.ru/item/3049009/moloko-domik-v-derevne-ultrapasterizovannoe-3-2-925-ml
+https://sbermarket.ru/metro/kofie-lavazza-oro-zierno, https://www.utkonos.ru/item/3140224/kofe-lavazza-oro-v-zernakh-1000g-vu
+https://sbermarket.ru/metro/kofie-lavazza-crema-e-aroma-v-zernah-1-kg, https://www.utkonos.ru/item/3137770/kofe-lavazza-crema-aroma-v-zernakh-1kg-v-vakuumnoj-upakovke
+https://sbermarket.ru/metro/gotovyi-zavtrak-nestle-nesquik-shariki-s-shokoladom-1, https://www.utkonos.ru/item/3316575/zavtrak-nesquik-shokoladnyj-700-g
+https://sbermarket.ru/metro/voda-kalinov-rodnik,https://www.utkonos.ru/item/3087671/voda-pitevaja-kalinov-rodnik-negazirovannaja-9-l
+https://sbermarket.ru/metro/goviadina-tushienaia-russkii-izysk-vysshii-sort,https://www.utkonos.ru/item/3102813/govjadina-russkij-izysk-vysshij-sort-tushenaja-325-g
+https://sbermarket.ru/metro/muka-frantsuzskaia-shtuchka-pshienichnaia-ekstra, https://www.utkonos.ru/item/3213061/muka-francuzskaja-shtuchka-pshenichnaja-ekstra-2-kg
+https://sbermarket.ru/metro/konfiety-akorkunov-assorti-tiemnyi-shokolad-1, https://www.utkonos.ru/item/3334556/konfety-a-korkunov-shokoladnye-kollekcija-temnyj-shokolad-192-g

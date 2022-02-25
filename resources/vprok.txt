@@ -1,0 +1,11 @@
+# таблица соответствия товара в системе Сбермаркета и в магазине Впрок
+# ссылка на товар в Сбермаркете, ссылка на товар в магазине Впрок
+
+https://sbermarket.ru/metro/moloko-domik-v-dierievnie-stierilizovannoie-3-2-percent-1, https://www.vprok.ru/product/domik-v-derevne-dom-v-der-moloko-ster-3-2-950g--309202
+https://sbermarket.ru/metro/kofie-lavazza-oro-zierno, https://www.vprok.ru/product/lavazza-kofe-lavazza-1kg-oro-zerno--450647
+https://sbermarket.ru/metro/kofie-lavazza-crema-e-aroma-v-zernah-1-kg, https://www.vprok.ru/product/lavazza-lavazza-kofe-crema-e-aroma-zer-vu-1kg--312129
+https://sbermarket.ru/metro/gotovyi-zavtrak-nestle-nesquik-shariki-s-shokoladom-1, https://www.vprok.ru/product/nesquik-nesquik-zavtrak-shokoladnyy-gotovyy-700g--318721
+https://sbermarket.ru/metro/voda-kalinov-rodnik,https://www.vprok.ru/product/kalinov-rodnik-voda-min-kalinov-rodnik-9l-bgaz--314354
+https://sbermarket.ru/metro/goviadina-tushienaia-russkii-izysk-vysshii-sort,https://www.vprok.ru/product/russkiy-izysk-gov-tush-rus-iz-vs-kl-325g--1070054
+https://sbermarket.ru/metro/muka-frantsuzskaia-shtuchka-pshienichnaia-ekstra, https://www.vprok.ru/product/starooskolskiy-hk-frants-sht-muka-pshen-ekstra-2kg--328627
+https://sbermarket.ru/metro/konfiety-akorkunov-assorti-tiemnyi-shokolad-1, https://www.vprok.ru/product/korkunov-a-kork-nab-konf-assorti-192g--429818

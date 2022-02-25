@@ -1,0 +1,14 @@
+# название магазина и минимальная стоимость заказа
+# если минимальная стоимость заказа не указана, то по умолчанию 1500 рублей
+# доступные магазины AUCHAN, GLOBUS, LENTA, MAGNIT, METRO, OKEY, SELGROS, UTKONOS, VPROK, OZON
+
+METRO, 1500
+LENTA, 1500
+SELGROS, 1500
+AUCHAN, 1500
+UTKONOS, 2500
+VPROK, 1500
+OZON, 1000
+
+# GLOBUS, 1500
+# OKEY, 1500

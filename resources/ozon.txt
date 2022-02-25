@@ -1,0 +1,11 @@
+# таблица соответствия товара в системе Сбермаркета и в магазине Ozon
+# ссылка на товар в Сбермаркете, ссылка на товар в Ozon
+
+https://sbermarket.ru/metro/moloko-domik-v-dierievnie-stierilizovannoie-3-2-percent-1, https://www.ozon.ru/product/moloko-ultrapasterizovannoe-3-2-domik-v-derevne-925-ml-146885636/
+https://sbermarket.ru/metro/kofie-lavazza-oro-zierno, https://www.ozon.ru/product/kofe-v-zernah-lavazza-qualita-oro-1-kg-32933709/
+https://sbermarket.ru/metro/kofie-lavazza-crema-e-aroma-v-zernah-1-kg, https://www.ozon.ru/product/kofe-v-zernah-lavazza-crema-e-aroma-1-kg-32933713/
+https://sbermarket.ru/metro/gotovyi-zavtrak-nestle-nesquik-shariki-s-shokoladom-1, https://www.ozon.ru/product/nestle-nesquik-shokoladnye-shariki-gotovyy-zavtrak-v-pakete-700-g-136111081/
+https://sbermarket.ru/metro/voda-kalinov-rodnik,https://www.ozon.ru/product/kalinov-rodnik-pitevaya-artezianskaya-negazirovannaya-voda-9-l-140030731/
+https://sbermarket.ru/metro/goviadina-tushienaia-russkii-izysk-vysshii-sort,https://www.ozon.ru/product/russkiy-izysk-govyadina-tushenaya-325-g-146186102/
+https://sbermarket.ru/metro/muka-frantsuzskaia-shtuchka-pshienichnaia-ekstra, https://www.ozon.ru/product/muka-frantsuzskaya-shtuchka-ekstra-vysshiy-sort-2-kg-307045356/
+https://sbermarket.ru/metro/konfiety-akorkunov-assorti-tiemnyi-shokolad-1, https://www.ozon.ru/product/a-korkunov-assorti-konfety-temnyy-shokolad-192-g-142088907/

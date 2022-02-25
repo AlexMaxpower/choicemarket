@@ -1,0 +1,16 @@
+# формат файла со списком продуктов: ссылка на товар, количество, обязательно покупать или нет
+# * означает покупать необязательно
+# если количество и "обязательность" не указать, то количество - 1 шт и покупать обязательно
+# если строка содержит знак #, то она пропускается
+# ссылки на товар должны быть с сайта Сбермаркета
+
+https://sbermarket.ru/metro/goviadina-tushienaia-russkii-izysk-vysshii-sort,5
+https://sbermarket.ru/metro/moloko-domik-v-dierievnie-stierilizovannoie-3-2-percent-1, 2
+https://sbermarket.ru/metro/muka-frantsuzskaia-shtuchka-pshienichnaia-ekstra, 1
+https://sbermarket.ru/metro/kofie-lavazza-crema-e-aroma-v-zernah-1-kg?sid=3
+https://sbermarket.ru/metro/gotovyi-zavtrak-nestle-nesquik-shariki-s-shokoladom-1?sid=3
+https://sbermarket.ru/metro/konfiety-akorkunov-assorti-tiemnyi-shokolad-1?sid=3
+
+   #  а тут еще комментарий
+
+https://sbermarket.ru/metro/voda-kalinov-rodnik, *
