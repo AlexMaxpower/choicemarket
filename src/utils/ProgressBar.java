@@ -1,11 +1,11 @@
 package utils;
 
 public class ProgressBar {
-
+    
     private double procent;
     private String bar;
     private int maxBar;
-
+    
     public ProgressBar(double procent, int maxBar) {
         this.procent = procent;
         this.maxBar = maxBar;
@@ -14,21 +14,21 @@ public class ProgressBar {
             bar = bar + "🟥🟥";
         }
     }
-
+    
     public String nextBar() {
-         bar = bar.replaceFirst("🟥🟥","🟩🟩");
+        bar = bar.replaceFirst("🟥🟥", "🟩🟩");
         return bar;
     }
-
+    
     public Double nextProcent() {
-        procent += 100/maxBar;
+        procent += 100 / maxBar;
         return procent;
     }
-
+    
     public String getBar() {
         return bar;
     }
-
+    
     public double getProcent() {
         return procent;
     }

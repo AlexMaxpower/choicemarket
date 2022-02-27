@@ -9,37 +9,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Thedath Oudarya
  */
 public final class Table {
     
     private Board board;
-
+    
     private final int tableWidth;
-
+    
     private List<String> headersList;
-
+    
     private List<List<String>> rowsList;
-
+    
     private List<Integer> colWidthsList;
-
+    
     private List<Integer> colAlignsList;
-
+    
     private int headerHeight;
-
+    
     private int rowHeight;
-
+    
     private int gridMode;
-
+    
     private Block initialTableBlock;
-
+    
     public final static int GRID_NON = 13;
-
+    
     public final static int GRID_FULL = 14;
-
+    
     public final static int GRID_COLUMN = 15;
-
+    
     public Table(Board board, int tableWidth, List<String> headersList, List<List<String>> rowsList) {
         this.board = board;
         if (tableWidth <= 0) {
@@ -92,7 +91,7 @@ public final class Table {
         rowHeight = 1;
         gridMode = GRID_COLUMN;
     }
-
+    
     public Table(Board board, int tableWidth, List<String> headersList, List<List<String>> rowsList, List<Integer> colWidthsList) {
         this(board, tableWidth, headersList, rowsList);
         if (colWidthsList.size() != headersList.size()) {
@@ -101,7 +100,7 @@ public final class Table {
             this.colWidthsList = colWidthsList;
         }
     }
-
+    
     public Table(Board board, int tableWidth, List<String> headersList, List<List<String>> rowsList, List<Integer> colWidthsList, List<Integer> colAlignsList) {
         this(board, tableWidth, headersList, rowsList, colWidthsList);
         if (colAlignsList.size() != headersList.size()) {
@@ -110,29 +109,29 @@ public final class Table {
             this.colAlignsList = colAlignsList;
         }
     }
-
+    
     public List<String> getHeadersList() {
         return headersList;
     }
-
+    
     public Table setHeadersList(List<String> headersList) {
         this.headersList = headersList;
         return this;
     }
-
+    
     public List<List<String>> getRowsList() {
         return rowsList;
     }
-
+    
     public Table setRowsList(List<List<String>> rowsList) {
         this.rowsList = rowsList;
         return this;
     }
-
+    
     public List<Integer> getColWidthsList() {
         return colWidthsList;
     }
-
+    
     public Table setColWidthsList(List<Integer> colWidthsList) {
         if (colWidthsList.size() != headersList.size()) {
             throw new RuntimeException("Column width count(" + colWidthsList.size() + ") and header size(" + headersList.size() + ") are not equal");
@@ -141,11 +140,11 @@ public final class Table {
         }
         return this;
     }
-
+    
     public List<Integer> getColAlignsList() {
         return colAlignsList;
     }
-
+    
     public Table setColAlignsList(List<Integer> colAlignsList) {
         if (colAlignsList.size() != headersList.size()) {
             throw new RuntimeException("Column align count(" + colAlignsList.size() + ") and header size(" + headersList.size() + ") are not equal");
@@ -154,29 +153,29 @@ public final class Table {
         }
         return this;
     }
-
+    
     public int getHeaderHeight() {
         return headerHeight;
     }
-
+    
     public Table setHeaderHeight(int headerHeight) {
         this.headerHeight = headerHeight;
         return this;
     }
-
+    
     public int getRowHeight() {
         return rowHeight;
     }
-
+    
     public Table setRowHeight(int rowHeight) {
         this.rowHeight = rowHeight;
         return this;
     }
-
+    
     public int getGridMode() {
         return gridMode;
     }
-
+    
     public Table setGridMode(int gridMode) {
         if (gridMode == GRID_NON || gridMode == GRID_FULL || gridMode == GRID_COLUMN) {
             this.gridMode = gridMode;
@@ -185,7 +184,7 @@ public final class Table {
         }
         return this;
     }
-
+    
     public Block tableToBlocks() {
         for (int i = 0; i < headersList.size(); i++) {
             String headerValue = headersList.get(i);
@@ -219,7 +218,7 @@ public final class Table {
                     }
                     int alignIndex = colAlignsList.get(j);
                     block.setDataAlign(alignIndex);
-
+                    
                     if (rowStartingBlock.getBelowBlock() == null) {
                         rowStartingBlock.setBelowBlock(block);
                     } else {
@@ -227,16 +226,16 @@ public final class Table {
                     }
                 }
             }
-        } else {            
+        } else {
             for (int i = 0; i < headersList.size(); i++) {
                 String columnData = "";
                 for (int j = 0; j < rowsList.size(); j++) {
                     String rowData = rowsList.get(j).get(i);
                     columnData = columnData.concat(rowData).concat("\n");
                 }
-                Block block = new Block(board, colWidthsList.get(i), rowsList.size(),columnData);
+                Block block = new Block(board, colWidthsList.get(i), rowsList.size(), columnData);
                 int alignIndex = colAlignsList.get(i);
-                    block.setDataAlign(alignIndex);
+                block.setDataAlign(alignIndex);
                 if (initialTableBlock.getBelowBlock() == null) {
                     initialTableBlock.setBelowBlock(block);
                 } else {
@@ -247,7 +246,7 @@ public final class Table {
         return initialTableBlock;
     }
     
-    public Table invalidate(){
+    public Table invalidate() {
         initialTableBlock = null;
         return this;
     }

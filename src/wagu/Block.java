@@ -10,65 +10,43 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- *
  * @author Thedath Oudarya
  */
 public final class Block {
-
-    protected static int nextIndex = 0;
-
-    private Board board;
-
-    private final int index;
-
-    private int width;
-
-    private int height;
-
-    private boolean allowGrid;
-
-    private int blockAlign;
-
+    
     public static final int BLOCK_LEFT = 1;
-
     public static final int BLOCK_CENTRE = 2;
-
     public static final int BLOCK_RIGHT = 3;
-
-    private String data;
-
-    private int dataAlign;
-
     public static final int DATA_TOP_LEFT = 4;
-
     public static final int DATA_TOP_MIDDLE = 5;
-
     public static final int DATA_TOP_RIGHT = 6;
-
     public static final int DATA_MIDDLE_LEFT = 7;
-
     public static final int DATA_CENTER = 8;
-
     public static final int DATA_MIDDLE_RIGHT = 9;
-
     public static final int DATA_BOTTOM_LEFT = 10;
-
     public static final int DATA_BOTTOM_MIDDLE = 11;
-
     public static final int DATA_BOTTOM_RIGHT = 12;
-
+    protected static int nextIndex = 0;
+    private final int index;
+    private Board board;
+    private int width;
+    private int height;
+    private boolean allowGrid;
+    private int blockAlign;
+    private String data;
+    private int dataAlign;
     private int x;
-
+    
     private int y;
-
+    
     private Block rightBlock;
-
+    
     private Block belowBlock;
-
+    
     private List<Charr> charrsList;
-
+    
     private String preview;
-
+    
     public Block(Board board, int width, int height) {
         this.board = board;
         if (width <= board.boardWidth) {
@@ -90,12 +68,12 @@ public final class Block {
         this.index = nextIndex;
         Block.nextIndex++;
     }
-
+    
     public Block(Board board, int width, int height, String data) {
         this(board, width, height);
         this.data = data;
     }
-
+    
     public Block(Board board, int width, int height, String data, Block rightBlock, Block belowBlock) {
         this(board, width, height, data);
         if (rightBlock != null) {
@@ -109,42 +87,42 @@ public final class Block {
             this.belowBlock = belowBlock;
         }
     }
-
+    
     protected int getIndex() {
         return index;
     }
-
+    
     public int getWidth() {
         return width;
     }
-
+    
     public Block setWidth(int width) {
         this.width = width;
         return this;
     }
-
+    
     public int getHeight() {
         return height;
     }
-
+    
     public Block setHeight(int height) {
         this.height = height;
         return this;
     }
-
+    
     public boolean isGridAllowed() {
         return allowGrid;
     }
-
+    
     public Block allowGrid(boolean allowGrid) {
         this.allowGrid = allowGrid;
         return this;
     }
-
+    
     public int getBlockAlign() {
         return blockAlign;
     }
-
+    
     public Block setBlockAlign(int blockAlign) {
         if (blockAlign == BLOCK_LEFT || blockAlign == BLOCK_CENTRE || blockAlign == BLOCK_RIGHT) {
             this.blockAlign = blockAlign;
@@ -153,35 +131,35 @@ public final class Block {
         }
         return this;
     }
-
+    
     public String getData() {
         return data;
     }
-
+    
     public Block setData(String data) {
         this.data = data;
         return this;
     }
-
+    
     public int getDataAlign() {
         return dataAlign;
     }
-
+    
     public Block setDataAlign(int dataAlign) {
         if (dataAlign == DATA_TOP_LEFT || dataAlign == DATA_TOP_MIDDLE || dataAlign == DATA_TOP_RIGHT
-                || dataAlign == DATA_MIDDLE_LEFT || dataAlign == DATA_CENTER || dataAlign == DATA_MIDDLE_RIGHT
-                || dataAlign == DATA_BOTTOM_LEFT || dataAlign == DATA_BOTTOM_MIDDLE || dataAlign == DATA_BOTTOM_RIGHT) {
+            || dataAlign == DATA_MIDDLE_LEFT || dataAlign == DATA_CENTER || dataAlign == DATA_MIDDLE_RIGHT
+            || dataAlign == DATA_BOTTOM_LEFT || dataAlign == DATA_BOTTOM_MIDDLE || dataAlign == DATA_BOTTOM_RIGHT) {
             this.dataAlign = dataAlign;
         } else {
             throw new RuntimeException("Invalid data align mode. " + dataAlign + " given.");
         }
         return this;
     }
-
+    
     protected int getX() {
         return x;
     }
-
+    
     protected Block setX(int x) {
         if (x + getWidth() + (isGridAllowed() ? 2 : 0) <= board.boardWidth) {
             this.x = x;
@@ -190,20 +168,20 @@ public final class Block {
         }
         return this;
     }
-
+    
     protected int getY() {
         return y;
     }
-
+    
     protected Block setY(int y) {
         this.y = y;
         return this;
     }
-
+    
     public Block getRightBlock() {
         return rightBlock;
     }
-
+    
     public Block setRightBlock(Block rightBlock) {
         if (rightBlock != null) {
             rightBlock.setX(getX() + getWidth() + (isGridAllowed() ? 1 : 0));
@@ -212,11 +190,11 @@ public final class Block {
         }
         return this;
     }
-
+    
     public Block getBelowBlock() {
         return belowBlock;
     }
-
+    
     public Block setBelowBlock(Block belowBlock) {
         if (belowBlock != null) {
             belowBlock.setX(getX());
@@ -225,13 +203,13 @@ public final class Block {
         }
         return this;
     }
-
+    
     protected Block invalidate() {
         charrsList = new ArrayList<>();
         preview = "";
         return this;
     }
-
+    
     protected Block build() {
         if (charrsList.isEmpty()) {
             int ix = x;
@@ -283,13 +261,13 @@ public final class Block {
                     }
                 }
             }
-
+            
             for (int i = 0; i < dataInLines.size(); i++) {
                 if (dataInLines.remove("")) {
                     i--;
                 }
             }
-
+            
             int givenAlign = getDataAlign();
             int dataStartingLineIndex = -1;
             int additionalHeight = (isGridAllowed() ? 1 : 0);
@@ -301,7 +279,7 @@ public final class Block {
                 dataStartingLineIndex = iy + additionalHeight + (getHeight() - dataInLines.size());
             }
             int dataEndingLineIndex = dataStartingLineIndex + dataInLines.size();
-
+            
             int extendedIX = ix + getWidth() + (isGridAllowed() ? 2 : 0);
             int extendedIY = iy + getHeight() + (isGridAllowed() ? 2 : 0);
             int startingIX = ix;
@@ -355,11 +333,11 @@ public final class Block {
         }
         return this;
     }
-
+    
     protected List<Charr> getChars() {
         return this.charrsList;
     }
-
+    
     public String getPreview() {
         build();
         if (preview.isEmpty()) {
@@ -379,7 +357,7 @@ public final class Block {
             for (Charr charr : charrsList) {
                 dataPoints[charr.getY()][charr.getX()] = String.valueOf(charr.getC());
             }
-
+            
             for (String[] dataPoint : dataPoints) {
                 for (String point : dataPoint) {
                     if (point == null) {
@@ -392,11 +370,11 @@ public final class Block {
         }
         return preview;
     }
-
+    
     public Block getMostRightBlock() {
         return getMostRightBlock(this);
     }
-
+    
     private Block getMostRightBlock(Block block) {
         if (block.getRightBlock() == null) {
             return block;
@@ -404,11 +382,11 @@ public final class Block {
             return getMostRightBlock(block.getRightBlock());
         }
     }
-
+    
     public Block getMostBelowBlock() {
         return getMostBelowBlock(this);
     }
-
+    
     private Block getMostBelowBlock(Block block) {
         if (block.getBelowBlock() == null) {
             return block;
@@ -416,12 +394,12 @@ public final class Block {
             return getMostBelowBlock(block.getBelowBlock());
         }
     }
-
+    
     @Override
     public String toString() {
         return index + " = [" + x + "," + y + "," + width + "," + height + "]";
     }
-
+    
     @Override
     public boolean equals(Object block) {
         if (block == null) {
@@ -433,7 +411,7 @@ public final class Block {
         Block b = (Block) block;
         return b.getIndex() == getIndex() && b.getX() == getX() && b.getY() == getY();
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;
