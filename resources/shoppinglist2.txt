@@ -2,7 +2,6 @@
 # * означает покупать необязательно
 # если количество и "обязательность" не указать, то количество - 1 шт и покупать обязательно
 
-
 https://sbermarket.ru/metro/goviadina-tushienaia-russkii-izysk-vysshii-sort,5
 https://sbermarket.ru/metro/moloko-domik-v-dierievnie-stierilizovannoie-3-2-percent-1, 2
 https://sbermarket.ru/metro/muka-frantsuzskaia-shtuchka-pshienichnaia-ekstra, 1

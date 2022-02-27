@@ -9,25 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author Thedath Oudarya
  */
 public class Board {
     
     protected boolean showBlockIndex;
-
+    
     protected int boardWidth;
-
+    
     private Block initialBlock;
-
+    
     private List<Charr> charrs;
-
+    
     private String preview;
-
+    
     public static final int APPEND_RIGHT = 16;
-
+    
     public static final int APPEND_BELOW = 17;
-
+    
     public Board(int boardWidth) {
         this.boardWidth = boardWidth;
         this.charrs = new ArrayList<>();
@@ -35,20 +34,20 @@ public class Board {
         this.showBlockIndex = false;
         Block.nextIndex = 0;
     }
-
+    
     public Board setInitialBlock(Block initialBlock) {
         this.initialBlock = initialBlock;
         return this;
     }
-
+    
     public boolean isBlockIndexShowing() {
         return showBlockIndex;
     }
-
+    
     public void showBlockIndex(boolean showBlockIndex) {
         this.showBlockIndex = showBlockIndex;
-    }        
-
+    }
+    
     public Board appendTableTo(int appendableBlockIndex, int appendableDirection, Table table) {
         Block tableBlock = table.tableToBlocks();
         Block block = getBlock(appendableBlockIndex);
@@ -63,7 +62,7 @@ public class Board {
         }
         return this;
     }
-
+    
     private void rearranegCoordinates(Block block) {
         Block rightBlock = block.getRightBlock();
         Block belowBlock = block.getBelowBlock();
@@ -105,7 +104,7 @@ public class Board {
             }
         }
     }
-
+    
     public Block getBlock(int blockIndex) {
         if (blockIndex >= 0) {
             return getBlock(blockIndex, initialBlock);
@@ -113,7 +112,7 @@ public class Board {
             throw new RuntimeException("Block index cannot be negative. " + blockIndex + " given.");
         }
     }
-
+    
     private Block getBlock(int blockIndex, Block block) {
         Block foundBlock = null;
         if (block.getIndex() == blockIndex) {
@@ -134,13 +133,13 @@ public class Board {
         }
         return foundBlock;
     }
-
+    
     public Board build() {
         if (charrs.isEmpty()) {
             //rearranegCoordinates(initialBlock);
             buildBlock(initialBlock);
             dumpCharrsFromBlock(initialBlock);
-
+            
             int maxY = -1;
             int maxX = -1;
             for (Charr charr : charrs) {
@@ -161,7 +160,7 @@ public class Board {
                     dataPoints[charr.getY()][charr.getX()] = newValue;
                 }
             }
-
+            
             for (String[] dataPoint : dataPoints) {
                 for (String point : dataPoint) {
                     if (point == null) {
@@ -172,22 +171,22 @@ public class Board {
                 preview = preview.concat(String.valueOf(Charr.NL));
             }
         }
-
+        
         return this;
     }
-
+    
     public String getPreview() {
         build();
         return preview;
     }
-
+    
     public Board invalidate() {
         invalidateBlock(initialBlock);
         charrs = new ArrayList<>();
         preview = "";
         return this;
     }
-
+    
     private void buildBlock(Block block) {
         if (block != null) {
             block.build();
@@ -195,7 +194,7 @@ public class Board {
             buildBlock(block.getBelowBlock());
         }
     }
-
+    
     private void dumpCharrsFromBlock(Block block) {
         if (block != null) {
             charrs.addAll(block.getChars());
@@ -203,7 +202,7 @@ public class Board {
             dumpCharrsFromBlock(block.getBelowBlock());
         }
     }
-
+    
     private void invalidateBlock(Block block) {
         if (block != null) {
             block.invalidate();
@@ -211,5 +210,5 @@ public class Board {
             invalidateBlock(block.getBelowBlock());
         }
     }
-
+    
 }

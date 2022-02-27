@@ -7,21 +7,24 @@ import reports.PriceReport;
 import shops.*;
 import utils.ProgressBar;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ChoiceMarketManager {
-
+    
     private ShoppingList shoppingList;
     private List<Shop> shops = new ArrayList<>();
     private List<Product> products = new ArrayList<>();
-    private Map<ShopName,Integer> minOrders = new LinkedHashMap<>();
-
-    public void run(){
-
+    private Map<ShopName, Integer> minOrders = new LinkedHashMap<>();
+    
+    public void run() {
+        
         DataInOutManager fileInOutManager = new FileInOutManager();
         shoppingList = fileInOutManager.getShoppingList();
         shoppingList.print();
-
+        
         minOrders = fileInOutManager.getMinOrderMap();
         if (minOrders.isEmpty()) {
             System.out.println("Магазины для парсинга не заданы в файле minorder.txt");
@@ -82,32 +85,32 @@ public class ChoiceMarketManager {
                 default:
                     break;
             }
-            System.out.println(minOrder.name() + " " +minOrders.get(minOrder));
+            System.out.println(minOrder.name() + " " + minOrders.get(minOrder));
         }
-
+        
         System.out.println();
-
+        
         Product product;
-
-        for (int i=0; i<shoppingList.get().size(); i++) {
+        
+        for (int i = 0; i < shoppingList.get().size(); i++) {
             ProgressBar progressBar = new ProgressBar(0, shops.size());
             product = new Product(shoppingList.get().get(i).getShortUrl(),
-                    shoppingList.get().get(i).getQuantity(),
-                    shoppingList.get().get(i).getMandatory());
+                shoppingList.get().get(i).getQuantity(),
+                shoppingList.get().get(i).getMandatory());
             System.out.print("Запуск процесса парсинга " + progressBar.getBar() + " "
-                    + progressBar.getProcent() + "% \r");
-
+                + progressBar.getProcent() + "% \r");
+            
             for (Shop shop : shops) {
                 shop.getProductInfo(product);
                 System.out.print(product.name + " " + progressBar.nextBar() + " "
-                        + progressBar.nextProcent() + "% \r");
+                    + progressBar.nextProcent() + "% \r");
             }
             System.out.println(product.name + " " + progressBar.nextBar() + " "
-                    + "100%");
+                + "100%");
             products.add(product);
         }
-
+        
         PriceReport priceReport = new PriceReport();
-        priceReport.print(products,shops);
+        priceReport.print(products, shops);
     }
 }
