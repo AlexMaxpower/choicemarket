@@ -7,9 +7,9 @@ import java.util.Map;
 
 public interface DataInOutManager {
     
-    ShoppingList getShoppingList();
+    ShoppingList getShoppingList(String filename);
     
-    Map<ShopName, Integer> getMinOrderMap();
+    Map<ShopName, Integer> getMinOrderMap(String filename);
     
     Map<String, String> getProductUrlMap(ShopName shopName);
 }
