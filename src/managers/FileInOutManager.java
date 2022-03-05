@@ -11,17 +11,15 @@ import java.nio.file.Path;
 import java.util.*;
 
 public class FileInOutManager implements DataInOutManager {
-    final static String FILENAME_SHOPPINGLIST = "resources/shoppinglist.txt";
-    final static String FILENAME_MINORDER = "resources/minorder.txt";
-    
+
     private ShoppingList shoppingList = new ShoppingList();
     private Map<ShopName, Integer> minOrderMap = new LinkedHashMap<>();
     private List<ShopName> shopsList = new ArrayList<>();
     
     @Override
-    public ShoppingList getShoppingList() {
+    public ShoppingList getShoppingList(String filename) {
         
-        String dataFile = readFileContentsOrNull(FILENAME_SHOPPINGLIST);
+        String dataFile = readFileContentsOrNull(filename);
         if (dataFile == null) {
             return null;
         }
@@ -61,9 +59,9 @@ public class FileInOutManager implements DataInOutManager {
     }
     
     @Override
-    public Map<ShopName, Integer> getMinOrderMap() {
+    public Map<ShopName, Integer> getMinOrderMap(String filename) {
         
-        String dataFile = readFileContentsOrNull(FILENAME_MINORDER);
+        String dataFile = readFileContentsOrNull(filename);
         if (dataFile == null) {
             return null;
         }

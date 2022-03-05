@@ -19,13 +19,13 @@ public class ChoiceMarketManager {
     private List<Product> products = new ArrayList<>();
     private Map<ShopName, Integer> minOrders = new LinkedHashMap<>();
     
-    public void run() {
+    public void run(String[] filenames) {
         
         DataInOutManager fileInOutManager = new FileInOutManager();
-        shoppingList = fileInOutManager.getShoppingList();
+        shoppingList = fileInOutManager.getShoppingList(filenames[0]);
         shoppingList.print();
         
-        minOrders = fileInOutManager.getMinOrderMap();
+        minOrders = fileInOutManager.getMinOrderMap(filenames[1]);
         if (minOrders.isEmpty()) {
             System.out.println("Магазины для парсинга не заданы в файле minorder.txt");
             return;
