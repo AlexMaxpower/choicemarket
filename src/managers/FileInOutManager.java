@@ -28,7 +28,7 @@ public class FileInOutManager implements DataInOutManager {
         
         String[] lines = dataFile.split("\\n");
         for (int i = 0; i < lines.length; i++) {
-            if ((!lines[i].contains("#")) && (lines[i].trim().length() != 0)) {
+            if ((!lines[i].trim().startsWith("#")) && (lines[i].trim().length() != 0)) {
                 String[] lineContents = lines[i].split(",");
                 String name = Converter.urlToShortUrl(lineContents[0].trim());
                 ;
@@ -68,7 +68,7 @@ public class FileInOutManager implements DataInOutManager {
         
         String[] lines = dataFile.split("\\n");
         for (int i = 0; i < lines.length; i++) {
-            if ((!lines[i].contains("#")) && (lines[i].trim().length() != 0)) {
+            if ((!lines[i].trim().startsWith("#")) && (lines[i].trim().length() != 0)) {
                 String[] lineContents = lines[i].split(",");
                 
                 for (ShopName shopName : ShopName.values()) {

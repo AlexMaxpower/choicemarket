@@ -27,7 +27,7 @@ public class ChoiceMarketManager {
         
         minOrders = fileInOutManager.getMinOrderMap(filenames[1]);
         if (minOrders.isEmpty()) {
-            System.out.println("Магазины для парсинга не заданы в файле minorder.txt");
+            System.out.println("Магазины для парсинга не заданы в файле " + filenames[1]);
             return;
         }
         for (ShopName minOrder : minOrders.keySet()) {
