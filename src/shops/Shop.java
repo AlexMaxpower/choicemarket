@@ -10,7 +10,7 @@ import utils.Converter;
 import java.io.IOException;
 
 public class Shop {
-    public double minOrder;
+    private double minOrder;
     private String shopUrl;
     private ShopName shopName;
     
@@ -48,5 +48,9 @@ public class Shop {
     
     public ShopName getShopName() {
         return shopName;
+    }
+
+    public double getMinOrder() {
+        return minOrder;
     }
 }

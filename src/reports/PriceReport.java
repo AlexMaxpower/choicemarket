@@ -1,13 +1,17 @@
 package reports;
 
 import models.Product;
+import models.ShopName;
 import shops.Shop;
 import wagu.Block;
 import wagu.Board;
 import wagu.Table;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PriceReport {
     
@@ -53,6 +57,8 @@ public class PriceReport {
         
         List<List<String>> rowsList = new ArrayList<>();
         List<String> rowList;
+        Map<ShopName, Double> orderSumMap = new HashMap<>();
+
         for (int i = 0; i < products.size(); i++) {
             rowList = new ArrayList<>();
             rowList.add(" " + products.get(i).name + " - " + products.get(i).quantity + " шт.");
@@ -60,7 +66,10 @@ public class PriceReport {
                 String costInTable;
                 Double cost = products.get(i).cost.get(shop.getShopName());
                 if ((cost != null) && (cost > 0)) {
-                    costInTable = Double.toString(cost * products.get(i).quantity);
+                    Integer quantity = products.get(i).quantity;
+                    costInTable = Double.toString(cost * quantity);
+                    Double orderSum = orderSumMap.getOrDefault(shop.getShopName(),0.0);
+                    orderSumMap.put(shop.getShopName(), orderSum + cost * quantity);
                     if (cost == minCosts.get(i)) {
                         costInTable += " 🟩";
                     }
@@ -76,7 +85,19 @@ public class PriceReport {
             }
             rowsList.add(rowList);
         }
-        
+
+        rowList = new ArrayList<>();
+        rowList.add(" Сумма заказа");
+        for (Shop shop : shops) {
+            Double orderSum = orderSumMap.get(shop.getShopName());
+            String orderSumInTable = new DecimalFormat("#0.00").format(orderSum).replace(',', '.');
+            if (orderSum < shop.getMinOrder()) {
+                orderSumInTable += " 🟥";
+            }
+            rowList.add(orderSumInTable);
+        }
+        rowsList.add(rowList);
+
         Board board = new Board(72 + 16 * shops.size());
         Table table = new Table(board, 72 + 16 * shops.size(), headersList, rowsList);
         
@@ -99,6 +120,7 @@ public class PriceReport {
         System.out.println(tableString);
         System.out.println("🟩 - минимальная стоимость товара");
         System.out.println(" — - товара нет в наличии");
+        System.out.println("🟥 - сумма заказа меньше минимальной");
         if (printRemark) {
             System.out.println("? - товара нет в таблице соответствия");
         }
