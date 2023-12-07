@@ -12,20 +12,12 @@ import java.util.*;
 
 public class FileInOutManager implements DataInOutManager {
 
-    private ShoppingList shoppingList = new ShoppingList();
-    private Map<ShopName, Integer> minOrderMap = new LinkedHashMap<>();
-    private List<ShopName> shopsList = new ArrayList<>();
-    
     @Override
-    public ShoppingList getShoppingList(String filename) {
-        
-        String dataFile = readFileContentsOrNull(filename);
-        if (dataFile == null) {
-            return null;
-        }
+    public ShoppingList getShoppingList(String filename) throws ReadFileException {
+        String dataFile = readFileContents(filename);
         
         ShoppingListItem shoppingListItem;
-        
+        ShoppingList shoppingList = new ShoppingList();
         String[] lines = dataFile.split("\\n");
         for (int i = 0; i < lines.length; i++) {
             if ((!lines[i].trim().startsWith("#")) && (lines[i].trim().length() != 0)) {
@@ -58,13 +50,10 @@ public class FileInOutManager implements DataInOutManager {
     }
     
     @Override
-    public Map<ShopName, Integer> getMinOrderMap(String filename) {
+    public Map<ShopName, Integer> getMinOrderMap(String filename) throws ReadFileException {
+        String dataFile = readFileContents(filename);
         
-        String dataFile = readFileContentsOrNull(filename);
-        if (dataFile == null) {
-            return null;
-        }
-        
+        Map<ShopName, Integer> minOrderMap = new LinkedHashMap<>();
         String[] lines = dataFile.split("\\n");
         for (int i = 0; i < lines.length; i++) {
             if ((!lines[i].trim().startsWith("#")) && (!lines[i].isBlank())) {
@@ -74,10 +63,8 @@ public class FileInOutManager implements DataInOutManager {
                     if (shopName.name().equals(lineContents[0].trim())) {
                         if (lineContents.length == 1) {
                             minOrderMap.put(shopName, 1500);
-                            shopsList.add(shopName);
                         } else {
                             minOrderMap.put(shopName, Integer.parseInt(lineContents[1].trim()));
-                            shopsList.add(shopName);
                         }
                     }
                 }
@@ -89,15 +76,11 @@ public class FileInOutManager implements DataInOutManager {
     }
     
     @Override
-    public Map<String, String> getProductUrlMap(ShopName shopName) {
-        
+    public Map<String, String> getProductUrlMap(ShopName shopName) throws ReadFileException {
         Map<String, String> productUrlMap = new HashMap<>();
         String fileNameUrlMap = "resources/" + shopName.name().toLowerCase() + ".txt";
         
-        String dataFile = readFileContentsOrNull(fileNameUrlMap);
-        if (dataFile == null) {
-            return null;
-        }
+        String dataFile = readFileContents(fileNameUrlMap);
         
         String[] lines = dataFile.split("\\n");
         for (int i = 0; i < lines.length; i++) {
@@ -105,7 +88,6 @@ public class FileInOutManager implements DataInOutManager {
                 
                 String[] lineContents = lines[i].split(",");
                 String shortUrlSber = Converter.urlToShortUrl(lineContents[0].trim());
-                ;
                 String urlOtherShop = lineContents[1].trim();
                 
                 productUrlMap.put(shortUrlSber, urlOtherShop);
@@ -114,12 +96,11 @@ public class FileInOutManager implements DataInOutManager {
         return productUrlMap;
     }
     
-    private String readFileContentsOrNull(String path) {
+    private String readFileContents(String path) throws ReadFileException {
         try {
-            return Files.readString(Path.of(path));
-        } catch (IOException e) {
-            System.out.println("Невозможно прочитать файл " + path + ".");
-            return null;
-        }
+			return Files.readString(Path.of(path));
+		} catch (IOException e) {
+			throw new ReadFileException("Невозможно прочитать файл " + path + ".");
+		}
     }
 }

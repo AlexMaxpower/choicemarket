@@ -16,17 +16,23 @@ public class ChoiceMarketManager {
     
     public void run(String[] filenames) {
         DataInOutManager fileInOutManager = new FileInOutManager();
-        ShoppingList shoppingList = fileInOutManager.getShoppingList(filenames[0]);
-        shoppingList.print();
-        
+        ShoppingList shoppingList;
         Map<ShopName, Integer> minOrders = new LinkedHashMap<>();
-        minOrders = fileInOutManager.getMinOrderMap(filenames[1]);
+        
+		try {
+			shoppingList = fileInOutManager.getShoppingList(filenames[0]);
+			minOrders = fileInOutManager.getMinOrderMap(filenames[1]);
+		} catch (ReadFileException e) {
+			System.err.println(e.getMessage());
+			return;
+		}
         
         if (minOrders.isEmpty()) {
-            System.out.println("Магазины для парсинга не заданы в файле " + filenames[1]);
+            System.err.println("Магазины для парсинга не заданы в файле " + filenames[1]);
             return;
         }
         
+        shoppingList.print();
         printMinOrders(minOrders);
         System.out.println();
         
@@ -78,7 +84,7 @@ public class ChoiceMarketManager {
 				shopInstance.setMinOrder(minOrderValue);
 				shops.add(shopInstance);
 			} catch (Exception e) {
-				e.printStackTrace();
+				System.out.println(e.getCause().getMessage());
 			}
         }
 		

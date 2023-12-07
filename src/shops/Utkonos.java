@@ -2,6 +2,7 @@ package shops;
 
 import managers.DataInOutManager;
 import managers.FileInOutManager;
+import managers.ReadFileException;
 import models.Product;
 
 import org.jsoup.Connection;
@@ -18,7 +19,7 @@ public class Utkonos extends Shop {
     private Map<String, String> shortUrlMap = new HashMap<>();
     private static final ShopName shopName = ShopName.UTKONOS;
     
-    public Utkonos() {
+    public Utkonos() throws ReadFileException {
         fillingShortUrlMap();
     }
     
@@ -65,7 +66,7 @@ public class Utkonos extends Shop {
         return shopName;
     }
     
-    private void fillingShortUrlMap() {
+    private void fillingShortUrlMap() throws ReadFileException {
         DataInOutManager fileInOutManager = new FileInOutManager();
         shortUrlMap = fileInOutManager.getProductUrlMap(shopName);
     }
