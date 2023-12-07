@@ -1,7 +1,7 @@
 package shops;
 
 import models.Product;
-import models.ShopName;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -10,8 +10,7 @@ import utils.Converter;
 import java.io.IOException;
 
 public class Shop {
-    private double minOrder;
-    private String shopUrl;
+    protected double minOrder;
     private ShopName shopName;
     
     public Product getProductInfoBase(Product product, String shopUrl, ShopName shopName) {
@@ -53,4 +52,10 @@ public class Shop {
     public double getMinOrder() {
         return minOrder;
     }
+
+	public void setMinOrder(double minOrder) {
+	    if (minOrder > 0) {
+	    	this.minOrder = minOrder;
+	    }
+	}
 }

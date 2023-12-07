@@ -3,7 +3,7 @@ package shops;
 import managers.DataInOutManager;
 import managers.FileInOutManager;
 import models.Product;
-import models.ShopName;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,21 +15,11 @@ import java.util.Map;
 
 public class Ozon extends Shop {
     
-    private double minOrder;
-    private String shopUrl = "https://www.ozon.ru";
     private Map<String, String> shortUrlMap = new HashMap<>();
-    private ShopName shopName = ShopName.OZON;
+    private static final ShopName shopName = ShopName.OZON;
     
     public Ozon() {
         fillingShortUrlMap();
-    }
-    
-    public double getMinOrder() {
-        return minOrder;
-    }
-    
-    public void setMinOrder(double minOrder) {
-        if (minOrder > 0) this.minOrder = minOrder;
     }
     
     @Override

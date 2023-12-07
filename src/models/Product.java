@@ -3,6 +3,8 @@ package models;
 import java.util.HashMap;
 import java.util.Map;
 
+import shops.ShopName;
+
 public class Product {
     public String name;
     public Map<ShopName, Double> cost = new HashMap<>();

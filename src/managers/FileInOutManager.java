@@ -1,8 +1,8 @@
 package managers;
 
-import models.ShopName;
 import models.ShoppingList;
 import models.ShoppingListItem;
+import shops.ShopName;
 import utils.Converter;
 
 import java.io.IOException;
@@ -31,7 +31,6 @@ public class FileInOutManager implements DataInOutManager {
             if ((!lines[i].trim().startsWith("#")) && (lines[i].trim().length() != 0)) {
                 String[] lineContents = lines[i].split(",");
                 String name = Converter.urlToShortUrl(lineContents[0].trim());
-                ;
                 Integer quantity = 1;
                 Boolean mandatory = true;
                 
@@ -50,7 +49,7 @@ public class FileInOutManager implements DataInOutManager {
                 }
                 
                 shoppingListItem = new ShoppingListItem(name, quantity, mandatory);
-                shoppingList.get().add(shoppingListItem);
+                shoppingList.getShoppingList().add(shoppingListItem);
             }
             
         }
@@ -68,7 +67,7 @@ public class FileInOutManager implements DataInOutManager {
         
         String[] lines = dataFile.split("\\n");
         for (int i = 0; i < lines.length; i++) {
-            if ((!lines[i].trim().startsWith("#")) && (lines[i].trim().length() != 0)) {
+            if ((!lines[i].trim().startsWith("#")) && (!lines[i].isBlank())) {
                 String[] lineContents = lines[i].split(",");
                 
                 for (ShopName shopName : ShopName.values()) {

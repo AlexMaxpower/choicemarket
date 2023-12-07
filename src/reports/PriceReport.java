@@ -1,8 +1,8 @@
 package reports;
 
 import models.Product;
-import models.ShopName;
 import shops.Shop;
+import shops.ShopName;
 import wagu.Block;
 import wagu.Board;
 import wagu.Table;

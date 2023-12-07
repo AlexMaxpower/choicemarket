@@ -1,8 +1,8 @@
 package managers;
 
 import models.Product;
-import models.ShopName;
 import models.ShoppingList;
+import models.ShoppingListItem;
 import reports.PriceReport;
 import shops.*;
 import utils.ProgressBar;
@@ -14,103 +14,74 @@ import java.util.Map;
 
 public class ChoiceMarketManager {
     
-    private ShoppingList shoppingList;
-    private List<Shop> shops = new ArrayList<>();
-    private List<Product> products = new ArrayList<>();
-    private Map<ShopName, Integer> minOrders = new LinkedHashMap<>();
-    
     public void run(String[] filenames) {
-        
         DataInOutManager fileInOutManager = new FileInOutManager();
-        shoppingList = fileInOutManager.getShoppingList(filenames[0]);
+        ShoppingList shoppingList = fileInOutManager.getShoppingList(filenames[0]);
         shoppingList.print();
         
+        Map<ShopName, Integer> minOrders = new LinkedHashMap<>();
         minOrders = fileInOutManager.getMinOrderMap(filenames[1]);
+        
         if (minOrders.isEmpty()) {
             System.out.println("Магазины для парсинга не заданы в файле " + filenames[1]);
             return;
         }
-        for (ShopName minOrder : minOrders.keySet()) {
-            switch (minOrder) {
-                case METRO:
-                    Metro metro = new Metro();
-                    metro.setMinOrder(minOrders.get(ShopName.METRO));
-                    shops.add(metro);
-                    break;
-                case AUCHAN:
-                    Auchan auchan = new Auchan();
-                    auchan.setMinOrder(minOrders.get(ShopName.AUCHAN));
-                    shops.add(auchan);
-                    break;
-                case LENTA:
-                    Lenta lenta = new Lenta();
-                    lenta.setMinOrder(minOrders.get(ShopName.LENTA));
-                    shops.add(lenta);
-                    break;
-                case GLOBUS:
-                    Globus globus = new Globus();
-                    globus.setMinOrder(minOrders.get(ShopName.GLOBUS));
-                    shops.add(globus);
-                    break;
-                case OKEY:
-                    Okey okey = new Okey();
-                    okey.setMinOrder(minOrders.get(ShopName.OKEY));
-                    shops.add(okey);
-                    break;
-                case MAGNIT:
-                    Magnit magnit = new Magnit();
-                    magnit.setMinOrder(minOrders.get(ShopName.MAGNIT));
-                    shops.add(magnit);
-                    break;
-                case SELGROS:
-                    Selgros selgros = new Selgros();
-                    selgros.setMinOrder(minOrders.get(ShopName.SELGROS));
-                    shops.add(selgros);
-                    break;
-                case UTKONOS:
-                    Utkonos utkonos = new Utkonos();
-                    utkonos.setMinOrder(minOrders.get(ShopName.UTKONOS));
-                    shops.add(utkonos);
-                    break;
-                case VPROK:
-                    Vprok vprok = new Vprok();
-                    vprok.setMinOrder(minOrders.get(ShopName.VPROK));
-                    shops.add(vprok);
-                    break;
-                case OZON:
-                    Ozon ozon = new Ozon();
-                    ozon.setMinOrder(minOrders.get(ShopName.OZON));
-                    shops.add(ozon);
-                    break;
-                default:
-                    break;
-            }
-            System.out.println(minOrder.name() + " " + minOrders.get(minOrder));
-        }
         
+        printMinOrders(minOrders);
         System.out.println();
         
-        Product product;
+        List<Shop> shops = fillShops(minOrders);
+        List<Product> products = new ArrayList<>();
         
-        for (int i = 0; i < shoppingList.get().size(); i++) {
-            ProgressBar progressBar = new ProgressBar(0, shops.size());
-            product = new Product(shoppingList.get().get(i).getShortUrl(),
-                shoppingList.get().get(i).getQuantity(),
-                shoppingList.get().get(i).getMandatory());
-            System.out.print("Запуск процесса парсинга " + progressBar.getBar() + " "
-                + progressBar.getProcent() + "% \r");
-            
-            for (Shop shop : shops) {
-                shop.getProductInfo(product);
-                System.out.print(product.name + " " + progressBar.nextBar() + " "
-                    + progressBar.nextProcent() + "% \r");
-            }
-            System.out.println(product.name + " " + progressBar.nextBar() + " "
-                + "100%");
-            products.add(product);
-        }
+        fillProductsList(shoppingList, shops, products);
         
         PriceReport priceReport = new PriceReport();
         priceReport.print(products, shops);
     }
+
+	private void fillProductsList(ShoppingList shoppingList, List<Shop> shops, List<Product> products) {
+		for (ShoppingListItem item : shoppingList.getShoppingList()) {
+        	ProgressBar progressBar = new ProgressBar(0, shops.size());
+        	Product product = new Product(item.getShortUrl(),
+        			item.getQuantity(),
+        			item.getMandatory());
+        	
+        	System.out.print("Запуск процесса парсинга " + progressBar.getBar() + " "
+        			+ progressBar.getProcent() + "% \r");
+        	
+        	for (Shop shop : shops) {
+        		shop.getProductInfo(product);
+        		System.out.print(product.name + " " + progressBar.nextBar() + " "
+        				+ progressBar.nextProcent() + "% \r");
+        	}
+        	System.out.println(product.name + " " + progressBar.nextBar() + " 100%");
+        	
+        	products.add(product);
+        }
+	}
+
+	private void printMinOrders(Map<ShopName, Integer> minOrders) {
+		minOrders.entrySet()
+				.stream()
+				.forEach(entry -> System.out.println(entry.getKey().name() + " " + entry.getValue()));
+	}
+
+	private List<Shop> fillShops(Map<ShopName, Integer> minOrders) {
+		List<Shop> shops = new ArrayList<>();
+		
+		for (ShopName shopEnum : minOrders.keySet()) {
+			double minOrderValue = minOrders.get(shopEnum);
+			
+			// Создаём объект, устанавливаем минимальное количество и добавляем в список магазинов
+			try {
+				Shop shopInstance = shopEnum.getShopClazz().getConstructor().newInstance();
+				shopInstance.setMinOrder(minOrderValue);
+				shops.add(shopInstance);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        }
+		
+		return shops;
+	}
 }

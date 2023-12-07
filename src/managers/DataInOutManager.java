@@ -1,7 +1,7 @@
 package managers;
 
-import models.ShopName;
 import models.ShoppingList;
+import shops.ShopName;
 
 import java.util.Map;
 
