@@ -1,20 +1,10 @@
 package shops;
 
 import models.Product;
-import models.ShopName;
 
 public class Magnit extends Shop {
-    private double minOrder;
-    private final String shopUrl = "https://sbermarket.ru/magnit";
-    private final ShopName shopName = ShopName.MAGNIT;
-    
-    public double getMinOrder() {
-        return minOrder;
-    }
-    
-    public void setMinOrder(double minOrder) {
-        if (minOrder > 0) this.minOrder = minOrder;
-    }
+    private static final String shopUrl = "https://sbermarket.ru/magnit";
+    private static final ShopName shopName = ShopName.MAGNIT;
     
     @Override
     public Product getProductInfo(Product product) {

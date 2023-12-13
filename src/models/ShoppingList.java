@@ -15,7 +15,7 @@ public class ShoppingList {
         shoppingList = new ArrayList<>();
     }
     
-    public List<ShoppingListItem> get() {
+    public List<ShoppingListItem> getShoppingList() {
         return shoppingList;
     }
     

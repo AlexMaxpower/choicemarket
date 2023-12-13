@@ -2,8 +2,9 @@ package shops;
 
 import managers.DataInOutManager;
 import managers.FileInOutManager;
+import managers.ReadFileException;
 import models.Product;
-import models.ShopName;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,21 +16,11 @@ import java.util.Map;
 
 public class Vprok extends Shop {
     
-    private double minOrder;
-    private String shopUrl = "https://www.vprok.ru";
     private Map<String, String> shortUrlMap = new HashMap<>();
-    private ShopName shopName = ShopName.VPROK;
+    private static final ShopName shopName = ShopName.VPROK;
     
-    public Vprok() {
+    public Vprok() throws ReadFileException {
         fillingShortUrlMap();
-    }
-    
-    public double getMinOrder() {
-        return minOrder;
-    }
-    
-    public void setMinOrder(double minOrder) {
-        if (minOrder > 0) this.minOrder = minOrder;
     }
     
     @Override
@@ -75,7 +66,7 @@ public class Vprok extends Shop {
         return shopName;
     }
     
-    private void fillingShortUrlMap() {
+    private void fillingShortUrlMap() throws ReadFileException {
         DataInOutManager fileInOutManager = new FileInOutManager();
         shortUrlMap = fileInOutManager.getProductUrlMap(shopName);
     }

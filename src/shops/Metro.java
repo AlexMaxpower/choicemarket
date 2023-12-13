@@ -1,26 +1,10 @@
 package shops;
 
 import models.Product;
-import models.ShopName;
 
 public class Metro extends Shop {
-    private double minOrder;
-    private String shopUrl = "https://sbermarket.ru/metro";
-    
-    
-    private ShopName shopName;
-    
-    public Metro() {
-        shopName = ShopName.METRO;
-    }
-    
-    public double getMinOrder() {
-        return minOrder;
-    }
-    
-    public void setMinOrder(double minOrder) {
-        if (minOrder > 0) this.minOrder = minOrder;
-    }
+    private static final String shopUrl = "https://sbermarket.ru/metro";
+    private static final ShopName shopName = ShopName.METRO;
     
     @Override
     public Product getProductInfo(Product product) {

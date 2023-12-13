@@ -1,20 +1,10 @@
 package shops;
 
 import models.Product;
-import models.ShopName;
 
 public class Globus extends Shop {
-    private double minOrder;
-    private final String shopUrl = "https://sbermarket.ru/globus";
-    private final ShopName shopName = ShopName.GLOBUS;
-    
-    public double getMinOrder() {
-        return minOrder;
-    }
-    
-    public void setMinOrder(double minOrder) {
-        if (minOrder > 0) this.minOrder = minOrder;
-    }
+    private static final String shopUrl = "https://sbermarket.ru/globus";
+    private static final ShopName shopName = ShopName.GLOBUS;
     
     @Override
     public Product getProductInfo(Product product) {
